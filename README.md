@@ -2,26 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
 
-## Development server
+## Task
+Create crud functionality for employee entity.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Employee attributes
+1. Employee id(auto gen one up sequence number)
+2. Name
+3. Date of birth
+4. Salary
+5. Skills (multiple checkboxes)(skill 1 to skill 10)
+6. Attach photo
 
-## Code scaffolding
+All data mandatory and validated before saving
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Employee list screen with pagination and search
+2. Add employee screen
+3. Edit employee screen
+4. Delete employee function in list screen and edit screen
 
-## Build
+Frontend : responsive angular 2+ (bootstrap or material UI)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Backend : firebase
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Login : use firebase sign-in using phone number
