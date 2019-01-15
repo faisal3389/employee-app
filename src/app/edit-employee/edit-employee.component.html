@@ -40,7 +40,7 @@
     <span>
       <mat-label>Photo:</mat-label>
       <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-      <button mat-flat-button (click)="uploadFile()">Upload File</button>
+      <button mat-raised-button color="primary" (click)="uploadFile()">Upload File</button>
       <progress #progressBar value="{{percentage}}" max="100" class="uploader">0%</progress>
     </span>
 
