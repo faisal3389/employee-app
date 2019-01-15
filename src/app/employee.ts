@@ -21,16 +21,3 @@ export class Employee {
         }
     }
 }
-
-export enum SkillsList {
-    Angular,
-    React,
-    Node,
-    Firebase,
-    Loopback,
-    Express,
-    Mongo,
-    Javascript,
-    python,
-    Java
-}

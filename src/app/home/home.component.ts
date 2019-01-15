@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   employees: any[];
+  isLoaded = false;
   constructor(
     private router: Router
   ) { }
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
       Object.keys(employeeList).forEach((key,index) => {
         this.employees.push(new Employee(employeeList[key]));
       });
+      this.isLoaded = true;
     })
   }
 

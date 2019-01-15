@@ -4,8 +4,18 @@
     List of Employees
   </h3>
 </div>
+
 <div>
-  <mat-list>
+  <div style="text-align:center" *ngIf="!isLoaded">
+    <mat-progress-spinner style="display: inline-block;" 
+      class="example-margin"
+      [color]="primary"
+      [diameter]="68"
+      [mode]="Indeterminate">
+    </mat-progress-spinner>
+  </div>
+  
+  <mat-list *ngIf="isLoaded">
     <mat-list-item *ngFor="let employee of employees">
       <mat-icon matListIcon>{{employee.photo}}</mat-icon>
       <h3 matLine> Name: {{employee.name}} </h3>

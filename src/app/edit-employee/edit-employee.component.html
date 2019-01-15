@@ -1,3 +1,41 @@
-<p>
-  edit-employee works!
-</p>
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h3 *ngIf="employeeId">
+    Edit Employee Data
+  </h3>
+  <h3 *ngIf="!employeeId">
+    Add New Employee
+  </h3>
+</div>
+<div class="example-container">
+  <form class="example-container" [formGroup]="employeeDetailsForm">
+
+    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="always">
+      <mat-label>Name:</mat-label>
+      <input matInput inputmode="text" formControlName="name" placeholder="please enter the name of the employee">
+    </mat-form-field>
+
+    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="always">
+      <mat-label>Date of Birth:</mat-label>
+      <input matInput inputmode="text" formControlName="dob" placeholder="please enter the DoB">
+    </mat-form-field>
+
+    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="always">
+      <mat-label>Salary:</mat-label>
+      <input matInput inputmode="text" formControlName="salary" placeholder="please enter the salary of the employee">
+    </mat-form-field>
+
+    <mat-select placeholder="Skills" [formControl]="selectedSkills" multiple>
+      <mat-select-trigger>
+        {{selectedSkills.value ? selectedSkills.value[0] : ''}}
+        <span *ngIf="selectedSkills.value?.length > 1" class="example-additional-selection">
+          (+{{selectedSkills.value.length - 1}} {{selectedSkills.value?.length === 2 ? 'other' : 'others'}})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
+    </mat-select>
+
+    <button type="submit" *ngIf="employeeId" mat-raised-button color="primary" (click)="editEmployee()">Update Employee Data</button>
+    <button type="submit" *ngIf="!employeeId" mat-raised-button color="primary" (click)="addEmployee()">Add Employee</button>
+  </form>
+</div>
