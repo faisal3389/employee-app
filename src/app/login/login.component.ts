@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // var ui = new firebaseui.auth.AuthUI(firebase.auth());
     let k = document.getElementById('firebaseui-auth-container');
     ui.start(k, uiConfig);
   }

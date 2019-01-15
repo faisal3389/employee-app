@@ -34,16 +34,24 @@ export class HomeComponent implements OnInit {
   }
 
   goToAddEditPage(data) {
-    if (data) {
-      this.router.navigate(['/employee'], { queryParams: { employeeId: data.employeeId } });
+    if (!this.gService.isUserLoggedIn) {
+      this.router.navigate(['/login']);
     } else {
-      this.router.navigate(['/employee'], { queryParams: { employeeId: null } });
+      if (data) {
+        this.router.navigate(['/employee'], { queryParams: { employeeId: data.employeeId } });
+      } else {
+        this.router.navigate(['/employee'], { queryParams: { employeeId: null } });
+      }
     }
   }
 
   async deleteEmployee(data) {
     console.log(data);
-    await this.gService.deleteEmployeeFromDB(data.employeeId);
+    if (!this.gService.isUserLoggedIn) {
+      this.router.navigate(['/login']);
+    } else {
+      await this.gService.deleteEmployeeFromDB(data.employeeId);
+    }
   }
 
 }
