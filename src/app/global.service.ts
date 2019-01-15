@@ -15,6 +15,8 @@ export class GlobalService {
   public employeeTotalDBRef: any;
   public rootDBRef: any;
   public database = firebase.database();
+  public isUserLoggedIn = false;
+  public showSignInData = false;
 
   constructor() {
     // this.rootDBRef = this.database.ref().child('');
@@ -51,5 +53,37 @@ export class GlobalService {
 
   async deleteEmployeeFromDB(eId) {
     await this.database.ref('employee_list/'+eId).set(null);
+  }
+
+  isLoggedIn() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        this.isUserLoggedIn = true;
+        this.showSignInData = true;
+        user.getIdToken().then(function(accessToken) {
+          console.log(accessToken);
+        });
+      } else {
+        // User is signed out.
+        this.isUserLoggedIn = false;
+        this.showSignInData = true;
+      }
+    }, (error) => {
+      this.isUserLoggedIn = false;
+      this.showSignInData = true;
+      console.log(error);
+    });
+  }
+
+  logout() {
+    firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+      this.isUserLoggedIn = false;
+      this.showSignInData = true;
+    }, function(error) {
+      // An error happened.
+      console.log(error);
+    });
   }
 }

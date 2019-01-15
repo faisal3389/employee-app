@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { HomeComponent } from './home/home.component';
 import { GlobalService } from './global.service';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 import { MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
@@ -20,6 +22,7 @@ import {MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 const appRoutes: Routes = [
@@ -27,6 +30,10 @@ const appRoutes: Routes = [
   {
     path: 'employee',
     component: EditEmployeeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   { path: '',
     redirectTo: '/home',
@@ -39,7 +46,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EditEmployeeComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +69,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatToolbarModule
   ],
   providers: [GlobalService],
   bootstrap: [AppComponent],

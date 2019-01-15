@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
       }
       this.isLoaded = true;
     })
+    this.gService.isLoggedIn();
   }
 
   goToAddEditPage(data) {
