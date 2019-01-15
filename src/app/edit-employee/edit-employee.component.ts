@@ -111,25 +111,33 @@ export class EditEmployeeComponent implements OnInit {
   uploadFile() {
     if(!this.employeeDetailsForm.valid) {
       console.log('please fill the form');
+      this.gService.openSnackBar('please fill the form');
       return;
     }
-    // var firebase = firebase;
-    var storageRef =  firebase.storage().ref('employee_photos/'+this.employeeDetailsForm.value.name);
-    var task = storageRef.put(this.fileToUpload);
+    if(this.fileToUpload) {
+      // var firebase = firebase;
+      this.gService.openSnackBar('Uploading file to firebase storage, please wait!!');    
+      var storageRef =  firebase.storage().ref('employee_photos/'+this.employeeDetailsForm.value.name);
+      var task = storageRef.put(this.fileToUpload);
 
-    task.on('state_changed',
-      //progress callback
-      (snapshot) => {
-        this.percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-      }, 
-      function error(err) {
-        console.log(err);
-      },
-      //complete callback
-      () => {
-        this.fileUploded = true;
-      }
-    )
+      task.on('state_changed',
+        //progress callback
+        (snapshot) => {
+          this.percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        }, 
+        function error(err) {
+          console.log(err);
+        },
+        //complete callback
+        () => {
+          this.fileUploded = true;
+          this.gService.openSnackBar('File successfully uploaded, you can submit now');    
+        }
+      )
+      return;
+    } else {
+      this.gService.openSnackBar('Please select a file to upload');    
+    }
   }
 
 }

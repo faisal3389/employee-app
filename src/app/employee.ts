@@ -11,7 +11,7 @@ export class Employee {
         this.name = person.name;
         this.dob = person.dob;
         this.salary = person.salary;
-        this.photoUrl = person.photoUrl;
+        this.getEmployeePhotoUrl(this, person.name);
         this.skills = [];
         if (typeof(person.skills) == 'string') {
             let employeeSkills = person.skills.split(',');
@@ -19,5 +19,19 @@ export class Employee {
                 this.skills.push(element);
             });
         }
+    }
+
+    getEmployeePhotoUrl(self, imgName) {
+        if(imgName) {
+            var storage = firebase.storage();
+            var imgRef = storage.ref(`employee_photos/${imgName}`);
+            imgRef.getDownloadURL().then(data => {
+                // console.log(data);
+                self.photoUrl = data;
+            }, err => {
+                console.log(err);
+            })
+        }
+        return ;
     }
 }

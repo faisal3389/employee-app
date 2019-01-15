@@ -16,8 +16,8 @@
   
   <mat-list *ngIf="isLoaded">
     <mat-list-item *ngFor="let employee of employees">
-      <!-- <mat-icon matListIcon>{{employee.photo}}</mat-icon> -->
-      <img height="100px" width="100px" src="{{getEmployeePhotoUrl(employee)}}"/>
+      <!-- <img height="100px" width="100px" src="{{getEmployeePhotoUrl(employee)}}"/> -->
+      <img height="100px" width="100px" src="{{employee.photoUrl}}"/>
       <h3 matLine> Name: {{employee.name}} </h3>
       <p matLine> Employee Id: {{employee.employeeId}}</p>
       <p matLine> Date of Birth: {{employee.dob}} </p>
