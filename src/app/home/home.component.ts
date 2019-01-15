@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from './../employee';
 import { Router } from '@angular/router';
+import { GlobalService } from './../global.service';
 
 @Component({
   selector: 'app-home',
@@ -11,19 +12,18 @@ export class HomeComponent implements OnInit {
   employees: any[];
   isLoaded = false;
   constructor(
-    private router: Router
+    private router: Router,
+    private gService: GlobalService
   ) { }
 
   ngOnInit() {
     this.employees = [];
-    let dbRefObj = firebase.database().ref().child('employee_list');
-    dbRefObj.on('value', snap => {
+    this.gService.employeeListDBRef.on('value', snap => {
       let employeeList = snap.val();
-
       Object.keys(employeeList).forEach((key,index) => {
         this.employees.push(new Employee(employeeList[key]));
+        this.isLoaded = true;
       });
-      this.isLoaded = true;
     })
   }
 

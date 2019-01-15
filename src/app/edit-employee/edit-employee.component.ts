@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from './../employee';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { GlobalService } from './../global.service';
 
 @Component({
   selector: 'app-edit-employee',
@@ -24,12 +25,13 @@ export class EditEmployeeComponent implements OnInit {
     'Javascript',
     'python',
     'Java'
-  ]
+  ];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private gService: GlobalService
   ) {
     this.employeeDetailsForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -45,16 +47,27 @@ export class EditEmployeeComponent implements OnInit {
       .subscribe(params => {
         console.log(params); 
         this.employeeId = params.employeeId;
+        this.fillDataInForm();
       });
   }
 
-  addEmployee() {
+  fillDataInForm() {
+    
+  }
 
+  async addEmployee() {
+    if(this.employeeDetailsForm.valid && this.selectedSkills.valid) {
+      this.employeeDetailsForm.controls['skills'].setValue(this.selectedSkills.value.join(','));
+      await this.gService.getTotalEmployees();
+      let keyForNextPush = this.gService.keyForNextPush;
+      await this.gService.database.ref('employee_list/'+keyForNextPush).set(this.employeeDetailsForm.value)
+      await this.gService.updateTotalEmployees();
+    }
   }
 
   editEmployee() {
     if(this.employeeDetailsForm.valid && this.selectedSkills.valid) {
-      this.employeeDetailsForm.controls['skills'].setValue(this.selectedSkills.value);
+      this.employeeDetailsForm.controls['skills'].setValue(this.selectedSkills.value.join(','));
       // this.router.navigate(['/home']);
     }
   }

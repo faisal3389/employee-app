@@ -25,7 +25,7 @@
       <input matInput inputmode="text" formControlName="salary" placeholder="please enter the salary of the employee">
     </mat-form-field>
 
-    <mat-select placeholder="Skills" [formControl]="selectedSkills" multiple>
+    <mat-select style="padding-bottom:10px;" placeholder="Skills" [formControl]="selectedSkills" multiple>
       <mat-select-trigger>
         {{selectedSkills.value ? selectedSkills.value[0] : ''}}
         <span *ngIf="selectedSkills.value?.length > 1" class="example-additional-selection">
@@ -38,4 +38,6 @@
     <button type="submit" *ngIf="employeeId" mat-raised-button color="primary" (click)="editEmployee()">Update Employee Data</button>
     <button type="submit" *ngIf="!employeeId" mat-raised-button color="primary" (click)="addEmployee()">Add Employee</button>
   </form>
+
+  <button mat-raised-button color="secondary" routerLink="/home">Go Home</button>
 </div>

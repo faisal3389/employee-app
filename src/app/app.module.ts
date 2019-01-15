@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { HomeComponent } from './home/home.component';
+import { GlobalService } from './global.service';
 
 import { MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
@@ -59,7 +60,7 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [GlobalService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
