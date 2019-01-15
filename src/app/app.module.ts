@@ -23,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 const appRoutes: Routes = [
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule
   ],
   providers: [GlobalService],
   bootstrap: [AppComponent],

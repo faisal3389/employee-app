@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
 
   goToAddEditPage(data) {
     if (!this.gService.isUserLoggedIn) {
+      this.gService.openSnackBar('Please login first')
       this.router.navigate(['/login']);
     } else {
       if (data) {
@@ -48,9 +49,11 @@ export class HomeComponent implements OnInit {
   async deleteEmployee(data) {
     console.log(data);
     if (!this.gService.isUserLoggedIn) {
+      this.gService.openSnackBar('Please login first')
       this.router.navigate(['/login']);
     } else {
       await this.gService.deleteEmployeeFromDB(data.employeeId);
+      this.gService.openSnackBar('Successfully deleted employee')
     }
   }
 

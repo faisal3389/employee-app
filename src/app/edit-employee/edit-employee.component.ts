@@ -77,7 +77,13 @@ export class EditEmployeeComponent implements OnInit {
       if (this.fileUploded) {
         await this.gService.database.ref('employee_list/'+keyForNextPush).set(formObj);
         await this.gService.updateTotalEmployees();
+        this.gService.openSnackBar('Successfully Added Employee');
+        this.router.navigate(['/home']);
+      } else {
+        this.gService.openSnackBar('please upload image first');
       }
+    } else {
+      this.gService.openSnackBar('please fill all fields in the form');
     }
   }
 
@@ -86,7 +92,12 @@ export class EditEmployeeComponent implements OnInit {
       this.employeeDetailsForm.controls['skills'].setValue(this.selectedSkills.value.join(','));
       let formObj = this.employeeDetailsForm.value;
       formObj['employeeId'] = this.employeeId;
+      if(this.fileToUpload) {
+        formObj['photoUrl'] = `https://firebasestorage.googleapis.com/v0/b/zetwork-4e2c1.appspot.com/o/employee_photos%2F${formObj.name}?alt=media&token=ac8e6d1d-870d-4726-9e1c-3fa09d48b1ce`;
+      }
       await this.gService.database.ref('employee_list/'+this.employeeId).set(formObj);
+      this.gService.openSnackBar('Successfully Updated Employee Information');
+      this.router.navigate(['/home']);
     }
   }
 

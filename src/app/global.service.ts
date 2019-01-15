@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Employee } from './employee';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class GlobalService {
   public showSignInData = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    public snackBar: MatSnackBar
   ) {
     // this.rootDBRef = this.database.ref().child('');
     this.employeeList = [];
@@ -87,10 +89,17 @@ export class GlobalService {
       // Sign-out successful.
       this.isUserLoggedIn = false;
       this.showSignInData = true;
+      this.openSnackBar('Loggedout successfully');
       this.router.navigate(['/home']);
     }, function(error) {
       // An error happened.
       console.log(error);
+    });
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'close', {
+      duration: 2000,
     });
   }
 }
