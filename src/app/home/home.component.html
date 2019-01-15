@@ -6,7 +6,7 @@
   </h3>
 </div>
 
-<div>
+<div class="body-class">
   <div style="text-align:center; width: 98%;" *ngIf="!isLoaded">
     <mat-progress-bar style="display: inline-block;"
       class="example-margin"
@@ -16,7 +16,8 @@
   
   <mat-list *ngIf="isLoaded">
     <mat-list-item *ngFor="let employee of employees">
-      <mat-icon matListIcon>{{employee.photo}}</mat-icon>
+      <!-- <mat-icon matListIcon>{{employee.photo}}</mat-icon> -->
+      <img height="100px" width="100px" src="{{getEmployeePhotoUrl(employee)}}"/>
       <h3 matLine> Name: {{employee.name}} </h3>
       <p matLine> Employee Id: {{employee.employeeId}}</p>
       <p matLine> Date of Birth: {{employee.dob}} </p>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MatFormFieldBase } from '@angular/material';
 import { Employee } from './employee';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,18 @@ export class GlobalService {
   public employeeListDBRef: any;
   public employeeTotalDBRef: any;
   public rootDBRef: any;
-  public database = firebase.database();
+  public database;
   public isUserLoggedIn = false;
   public showSignInData = false;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     // this.rootDBRef = this.database.ref().child('');
     this.employeeList = [];
     this.totalNumberOfEmployees = 0;
+    // var firebase = firebase;
+    this.database = firebase.database();
     this.employeeListDBRef = this.database.ref().child('employee_list');
     this.employeeTotalDBRef = this.database.ref().child('number_of_employees');
   }
@@ -56,13 +60,14 @@ export class GlobalService {
   }
 
   isLoggedIn() {
+    // var firebase = firebase;
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
         this.isUserLoggedIn = true;
         this.showSignInData = true;
         user.getIdToken().then(function(accessToken) {
-          console.log(accessToken);
+          // console.log(accessToken);
         });
       } else {
         // User is signed out.
@@ -77,10 +82,12 @@ export class GlobalService {
   }
 
   logout() {
+    // var firebase = firebase;
     firebase.auth().signOut().then(() => {
       // Sign-out successful.
       this.isUserLoggedIn = false;
       this.showSignInData = true;
+      this.router.navigate(['/home']);
     }, function(error) {
       // An error happened.
       console.log(error);

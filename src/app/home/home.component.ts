@@ -54,4 +54,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  async getEmployeePhotoUrl(data) {
+    if(data) {
+      // var firebase = firebase;
+      // var storageRef = firebase.storage().ref();
+      // return await storageRef.child('employee_photos/faisal.png').getDownloadURL();
+      // return 1;
+      // var storage = firebase.storage();
+      // var imgRef = storage.ref('employee_photos/faisal.png');
+      // imgRef.getDownloadURL().then(data => {
+      //   console.log(data);
+      // }, err => {
+      //   console.log(err);
+      // })
+    }
+  }
+
 }

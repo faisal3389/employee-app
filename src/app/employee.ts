@@ -4,14 +4,14 @@ export class Employee {
     dob: string;
     salary: string;
     skills: string[];
-    photo: string;
+    photoUrl: string;
 
     constructor(person) {
         this.employeeId = person.employeeId;
         this.name = person.name;
         this.dob = person.dob;
         this.salary = person.salary;
-        this.photo = person.photo;
+        this.photoUrl = person.photoUrl;
         this.skills = [];
         if (typeof(person.skills) == 'string') {
             let employeeSkills = person.skills.split(',');
