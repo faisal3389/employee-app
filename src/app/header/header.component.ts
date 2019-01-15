@@ -9,7 +9,7 @@ import { GlobalService } from './../global.service';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private gService: GlobalService
+    public gService: GlobalService
   ) { }
 
   ngOnInit() {

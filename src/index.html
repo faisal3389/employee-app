@@ -27,6 +27,7 @@
       messagingSenderId: "333058710805"
     };
     firebase.initializeApp(config);
+    window["firebase"] = firebase
   </script>
 
   <!-- firebase ui libraries for auth -->
@@ -50,8 +51,7 @@
         window.location.assign('home');
       }
     };
-
-  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  window['ui'] = new firebaseui.auth.AuthUI(firebase.auth());
   </script>
 </head>
 <body>

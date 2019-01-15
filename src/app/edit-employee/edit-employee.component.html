@@ -11,17 +11,17 @@
 <div class="example-container" class="body-class">
   <form class="example-container" [formGroup]="employeeDetailsForm">
 
-    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="always">
+    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="'always'">
       <mat-label>Name:</mat-label>
       <input matInput inputmode="text" formControlName="name" placeholder="please enter the name of the employee">
     </mat-form-field>
 
-    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="always">
+    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="'always'">
       <mat-label>Date of Birth:</mat-label>
       <input matInput inputmode="text" formControlName="dob" placeholder="please enter the DoB">
     </mat-form-field>
 
-    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="always">
+    <mat-form-field [hideRequiredMarker]="false" [floatLabel]="'always'">
       <mat-label>Salary:</mat-label>
       <input matInput inputmode="text" formControlName="salary" placeholder="please enter the salary of the employee">
     </mat-form-field>

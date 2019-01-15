@@ -23,7 +23,7 @@ export class Employee {
 
     getEmployeePhotoUrl(self, imgName) {
         if(imgName) {
-            var storage = firebase.storage();
+            var storage = window["firebase"].storage();
             var imgRef = storage.ref(`employee_photos/${imgName}`);
             imgRef.getDownloadURL().then(data => {
                 // console.log(data);

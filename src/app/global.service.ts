@@ -18,6 +18,8 @@ export class GlobalService {
   public database;
   public isUserLoggedIn = false;
   public showSignInData = false;
+  public firebase = window["firebase"];
+
 
   constructor(
     private router: Router,
@@ -27,7 +29,7 @@ export class GlobalService {
     this.employeeList = [];
     this.totalNumberOfEmployees = 0;
     // var firebase = firebase;
-    this.database = firebase.database();
+    this.database = this.firebase.database();
     this.employeeListDBRef = this.database.ref().child('employee_list');
     this.employeeTotalDBRef = this.database.ref().child('number_of_employees');
   }
@@ -63,7 +65,7 @@ export class GlobalService {
 
   isLoggedIn() {
     // var firebase = firebase;
-    firebase.auth().onAuthStateChanged((user) => {
+    this.firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
         this.isUserLoggedIn = true;
@@ -85,7 +87,7 @@ export class GlobalService {
 
   logout() {
     // var firebase = firebase;
-    firebase.auth().signOut().then(() => {
+    this.firebase.auth().signOut().then(() => {
       // Sign-out successful.
       this.isUserLoggedIn = false;
       this.showSignInData = true;

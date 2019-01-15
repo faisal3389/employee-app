@@ -117,7 +117,7 @@ export class EditEmployeeComponent implements OnInit {
     if(this.fileToUpload) {
       // var firebase = firebase;
       this.gService.openSnackBar('Uploading file to firebase storage, please wait!!');    
-      var storageRef =  firebase.storage().ref('employee_photos/'+this.employeeDetailsForm.value.name);
+      var storageRef =  this.gService.firebase.storage().ref('employee_photos/'+this.employeeDetailsForm.value.name);
       var task = storageRef.put(this.fileToUpload);
 
       task.on('state_changed',
