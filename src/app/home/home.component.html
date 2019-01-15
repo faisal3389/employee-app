@@ -6,13 +6,11 @@
 </div>
 
 <div>
-  <div style="text-align:center" *ngIf="!isLoaded">
-    <mat-progress-spinner style="display: inline-block;" 
+  <div style="text-align:center; width: 98%;" *ngIf="!isLoaded">
+    <mat-progress-bar style="display: inline-block;"
       class="example-margin"
       [color]="primary"
-      [diameter]="68"
-      [mode]="Indeterminate">
-    </mat-progress-spinner>
+      mode="indeterminate"></mat-progress-bar>
   </div>
   
   <mat-list *ngIf="isLoaded">
@@ -30,4 +28,6 @@
     </mat-list-item>
   </mat-list>
 </div>
-<button mat-raised-button color="primary" (click)="goToAddEditPage()">Add Employee</button>
+<div style="text-align:center">
+  <button mat-raised-button color="primary" (click)="goToAddEditPage()">Add Employee</button>
+</div>

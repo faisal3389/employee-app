@@ -40,8 +40,16 @@ export class GlobalService {
     return this.totalNumberOfEmployees;
   }
 
-  async updateTotalEmployees() {
+  async updateTotalEmployees(isIncrease = true) {
     let total = this.totalNumberOfEmployees;
-    await this.database.ref('number_of_employees').set(++total);
+    if(isIncrease) {
+      await this.database.ref('number_of_employees').set(++total);
+    } else {
+      await this.database.ref('number_of_employees').set(--total);
+    }
+  }
+
+  async deleteEmployeeFromDB(eId) {
+    await this.database.ref('employee_list/'+eId).set(null);
   }
 }

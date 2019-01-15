@@ -20,10 +20,15 @@ export class HomeComponent implements OnInit {
     this.employees = [];
     this.gService.employeeListDBRef.on('value', snap => {
       let employeeList = snap.val();
-      Object.keys(employeeList).forEach((key,index) => {
-        this.employees.push(new Employee(employeeList[key]));
-        this.isLoaded = true;
-      });
+      if (employeeList) {
+      this.employees = [];
+        Object.keys(employeeList).forEach((key,index) => {
+          if (employeeList[key]) {
+            this.employees.push(new Employee(employeeList[key]));
+          }
+        });
+      }
+      this.isLoaded = true;
     })
   }
 
@@ -35,8 +40,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  deleteEmployee(data) {
+  async deleteEmployee(data) {
     console.log(data);
+    await this.gService.deleteEmployeeFromDB(data.employeeId);
   }
 
 }

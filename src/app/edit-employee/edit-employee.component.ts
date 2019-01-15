@@ -51,8 +51,16 @@ export class EditEmployeeComponent implements OnInit {
       });
   }
 
-  fillDataInForm() {
-    
+  async fillDataInForm() {
+    var foo = await this.gService.employeeListDBRef.once('value')
+    var eData = foo.val();
+    if (this.employeeId) {
+      let id = <number>this.employeeId;
+      this.employeeDetailsForm.controls['name'].setValue(eData[id].name);
+      this.employeeDetailsForm.controls['dob'].setValue(eData[id].dob);
+      this.employeeDetailsForm.controls['salary'].setValue(eData[id].salary);
+      this.selectedSkills.setValue(eData[id].skills.split(','));
+    }
   }
 
   async addEmployee() {
@@ -60,15 +68,19 @@ export class EditEmployeeComponent implements OnInit {
       this.employeeDetailsForm.controls['skills'].setValue(this.selectedSkills.value.join(','));
       await this.gService.getTotalEmployees();
       let keyForNextPush = this.gService.keyForNextPush;
-      await this.gService.database.ref('employee_list/'+keyForNextPush).set(this.employeeDetailsForm.value)
+      let formObj = this.employeeDetailsForm.value;
+      formObj['employeeId'] = keyForNextPush;
+      await this.gService.database.ref('employee_list/'+keyForNextPush).set(formObj);
       await this.gService.updateTotalEmployees();
     }
   }
 
-  editEmployee() {
+  async editEmployee() {
     if(this.employeeDetailsForm.valid && this.selectedSkills.valid) {
       this.employeeDetailsForm.controls['skills'].setValue(this.selectedSkills.value.join(','));
-      // this.router.navigate(['/home']);
+      let formObj = this.employeeDetailsForm.value;
+      formObj['employeeId'] = this.employeeId;
+      await this.gService.database.ref('employee_list/'+this.employeeId).set(formObj);
     }
   }
 
