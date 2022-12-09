@@ -30,7 +30,7 @@
     "@angular/router": "^6.1.0",
     "@types/firebase": "^2.4.31",
     "core-js": "^2.5.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "firebase": "^4.1.3",
     "path": "^0.12.7",
     "rxjs": "~6.2.0",
